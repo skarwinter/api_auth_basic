@@ -14,6 +14,7 @@ app.use(
 );
 
 app.use(bodyParser.json());
+app.use(express.json());
 app.use('/api/v1/users', UserController);
 app.use('/api/v1/auth', AuthController);
 

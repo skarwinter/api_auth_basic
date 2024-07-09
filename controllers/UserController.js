@@ -6,10 +6,41 @@ import AuthMiddleware from '../middlewares/auth.middleware.js';
 
 const router = Router();
 
+
 router.post('/create', async (req, res) => {
-    const response = await UserService.createUser(req);
+    const response = await UserService.createUser(req.body);
     res.status(response.code).json(response.message);
 });
+  
+  router.post('/bulkCreate',
+    [
+      AuthMiddleware.validateToken,
+    ],
+    async (req, res) => {
+      const response = await UserService.bulkCreate(req.body);
+      res.status(response.code).json(response.message);
+    });
+
+router.get(
+    '/findUsers',
+    [
+        AuthMiddleware.validateToken,
+    ],
+    async (req, res) => {
+        const response = await UserService.findUsers(req.query);
+        res.status(response.code).json(response.message);
+    });
+
+router.get(
+    '/getAllUsers',
+    [
+        AuthMiddleware.validateToken,
+    ],
+    async (req, res) => {
+        const response = await UserService.getAllUsers(req);
+        res.status(response.code).json(response.message);
+    });
+
 
 router.get(
     '/:id',

@@ -124,7 +124,7 @@ const findUsers = async (queryParams) => {
     let sql = `
     SELECT DISTINCT u.* 
     FROM Users u
-    JOIN Sessions s ON u.id = s.id_user 
+    LEFT JOIN Sessions s ON u.id = s.id_user 
     WHERE 1=1 
   `; 
 
